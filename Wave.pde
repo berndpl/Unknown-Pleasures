@@ -2,24 +2,25 @@
 class Wave {
   
   int pos;
-  int speed;
   float[] y = new float [64];
+  int adjustx;
+  int adjusty = -20;  
   
   Wave(float [] val) {
-    println("instantiated!");
-    speed = 10;
-    pos = 400;
-//    y = val;
+//    println("instantiated!");
+    pos = height - marginbottom;
     arrayCopy(val,y);
-    //y[30]=30;
   }
 
   void display(){
     pos = pos - speed;
+    adjustx = (width/2) - ((scalex*y.length)/2);
+       
     noFill(); 
     beginShape();
     for (int i = 0; i < y.length; i++){
-    curveVertex((i*4), pos-y[i]);
+      
+    curveVertex(adjustx+(i*scalex), adjusty+(pos-y[i]));
     }
     endShape();
   }
